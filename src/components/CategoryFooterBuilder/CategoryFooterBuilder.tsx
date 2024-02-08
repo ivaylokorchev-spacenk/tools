@@ -88,16 +88,13 @@ const CategoryFooterBuilder = () => {
 		setCollapses((old) => [...old, { title: 'New Collapse Title', copy: 'New Collapse Copy' }]);
 	};
 
-	const doc = iframeRef.current?.contentDocument;
-	if(doc) {
-		writeHTML(doc, links, collapses, title)
-	}
+
 	useEffect(() => {
 		const doc = iframeRef.current?.contentDocument;
-		if(doc) {
-			writeHTML(doc, links, collapses, title)
+		if (doc) {
+			writeHTML(doc, links, collapses, title);
 		}
-	}, []);
+	}, [links, collapses]);
 
 	return (
 		<div className='w-full'>
@@ -136,7 +133,7 @@ const CategoryFooterBuilder = () => {
 				</div>
 				<h3 className='text-3xl text-center mt-3'>Preview</h3>
 				<p className='text-[12px] text-center'>
-					Link's Images are placeholders only, will be replaced with the correct image path in the code below. <br/>
+					Link&apos;s Images are placeholders only, will be replaced with the correct image path in the code below. <br/>
 					Keep in mind this is just to give a rough idea of what it would look like. <br/> 
 					It is NOT 100% accurate. Some elements like icons, fonts & images will be missing</p>
 				<iframe 
