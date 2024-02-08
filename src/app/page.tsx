@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="p-12">
+    <main className="flex justify-center items-center flex-col min-h-[85vh]">
       <h1 className="text-4xl text-center mt-5">
         Tools
       </h1>
