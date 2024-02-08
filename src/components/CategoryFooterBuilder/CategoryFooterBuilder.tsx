@@ -110,14 +110,17 @@ const CategoryFooterBuilder = () => {
 						/>
 					))}
 				</div>
+				<hr className='my-6'/>
 				<div>
-					<h2 className="mt-5 mb-2">Accordion</h2>
-					<h3>Title (sits above the collapses)</h3>
+					<h2 className="mb-2">Accordion</h2>
+					<h3>Title</h3>
 					<input
+						className='mb-3'
 						type="text"
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
 					/>
+					<h3 className=''>Collapse elements</h3>
 					<div className='flex flex-wrap gap-5'>
 					{collapses.map((collapse, index) => (
 						<CollapseInputs
@@ -131,8 +134,9 @@ const CategoryFooterBuilder = () => {
 					</div>
 					<button className='p-3 bg-green-300 rounded-md' onClick={addCollapse}>Add a collapse element</button>
 				</div>
-				<h3 className='text-3xl text-center mt-3'>Preview</h3>
-				<p className='text-[12px] text-center'>
+				<hr className='my-6'/>
+				<h3 className='text-3xl'>Preview</h3>
+				<p className='text-[12px]'>
 					Link&apos;s Images are placeholders only, will be replaced with the correct image path in the code below. <br/>
 					Keep in mind this is just to give a rough idea of what it would look like. <br/> 
 					It is NOT 100% accurate. Some elements like icons, fonts & images will be missing</p>
@@ -140,12 +144,13 @@ const CategoryFooterBuilder = () => {
 					className="w-full resize-x h-full mt-5 min-h-[400px]  border-2 border-dashed border-gray-300 bg-white"
 					ref={iframeRef}
 				></iframe>
-				<h3 className='text-3xl text-center mt-3'>HTML</h3>
+				<hr className='my-10'/>
+				<h3 className='text-3xl mb-3'>HTML</h3>
 				<div className="d-flex">
 					<textarea
 						onClick={(e) => {
 							e.currentTarget.select();
-							toast.success('Copied to clipboard', { position: 'top-right' });
+							toast.success('Copied to clipboard');
 							navigator.clipboard.writeText(e.currentTarget.value);
 						}}
 						className="w-full flex-1 text-xs min-w-[50%] max-h-[400px] border p-3 cursor-pointer"

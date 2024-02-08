@@ -15,7 +15,7 @@ type Props = {
 
 const LinkInputs = ({ link, links, setLinks}: Props) => {
   return (<div key={link.id} className='border p-3 flex flex-col gap-y-3'>
-    <h5>Link {link.id} </h5>
+    <h5 className='border-b'>Link {link.id} </h5>
     <div className="flex flex-col">
         <label>Text</label>
         <input
