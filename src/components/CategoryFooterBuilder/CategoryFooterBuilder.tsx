@@ -62,6 +62,8 @@ const generateHTML = (links: Link[], collapses: Collapse[], title: string, forIf
 const writeHTML = (doc: Document, links: Link[], collapses: Collapse[], title: string) => {
 	doc.open();
 	//TODO: find a better way to add the css for previews maybe fetch?!?
+	doc.write('<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>');
+	doc.write('<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>');
 	doc.write('<link rel="stylesheet" href="https://www.spacenk.com/on/demandware.static/Sites-spacenkgb-Site/-/en_GB/v1707383070106/css/global.css">');
 	doc.write(generateHTML(links, collapses, title, true));
 	doc.close();
