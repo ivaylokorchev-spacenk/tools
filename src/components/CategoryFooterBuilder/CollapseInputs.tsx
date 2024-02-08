@@ -12,7 +12,6 @@ type Props = {
 
 const CollapseInputs = ({ collapse, setCollapses, index}: Props) => {
     const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value)
         setCollapses((old) => old.map((c, i) => {
             if (i === index) {
                 return {
@@ -40,7 +39,6 @@ const CollapseInputs = ({ collapse, setCollapses, index}: Props) => {
         <div className="flex flex-col">
             <label>Title</label>
             <input
-                pattern="[a-z]"
                 type="text"
                 value={collapse.title}
                 onChange={onChangeTitle}
@@ -49,6 +47,7 @@ const CollapseInputs = ({ collapse, setCollapses, index}: Props) => {
         <div className="flex flex-col">
             <label>Copy</label>
             <textarea
+                rows={4}
                 value={collapse.copy}
                 onChange={onChangeCopy}
             />

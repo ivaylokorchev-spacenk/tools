@@ -4,56 +4,12 @@ import { useEffect, useRef, useState } from 'react';
 import CollapseInputs from './CollapseInputs';
 import LinkInputs from './LinkInputs';
 import toast from 'react-hot-toast';
-
+import { styles } from '@/utils/CategoryFooter';
 type Collapse = {
 	title: string;
 	copy: string;
 };
-const styles = `<style>
-.search-slot-bottom {
-  padding: 24px 0;
-}
-.search-slot-bottom > div:first-child {
-  margin-bottom: 32px;
-}
-.search-slot-bottom .btn .icon-snk-plus {
-  display: none;
-}
-.search-slot-bottom .btn .icon-snk-minus {
-  display: block;
-}
-.search-slot-bottom .btn.collapsed .icon-snk-plus {
-  display: block;
-}
-.search-slot-bottom .btn.collapsed .icon-snk-minus {
-  display: none;
-}
-.search-slot-bottom img {
-  width: 74px;
-  height: 74px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-.search-slot-bottom .border-bottom {
-  border-color: #d3c5bc !important;
-}
-.search-slot-bottom .icon-snk-arrow-right::before {
-  font-weight: 1000 !important;
-  display: flex;
-}
-@media (min-width: 810px) {
-  .search-slot-bottom {
-    padding: 40px 0;
-  }
-  .search-slot-bottom img {
-    width: 110px;
-    height: 110px;
-  }
-  .search-slot-bottom > div:first-child {
-    margin-bottom: 40px;
-  }
-}
-</style>`;
+
 type Link = {
 	id: number;
 	text: string;
@@ -100,12 +56,13 @@ const generateHTML = (links: Link[], collapses: Collapse[], title: string, forIf
 				${title && `<h3 class="mb-2 mb-md-3">${title}</h3>`}
 				${collapses.map(createCollapse).join('')}
 			</div>
-		</div>`.replace(forIframe ? /<img(.*?)src="(.*?)"(.*?)\/>/g : '', forIframe ? '<img$1src=""$3/>' : '');
+		</div>`.replace(forIframe ? /<img(.*?)src="(.*?)"(.*?)\/>/g : '', forIframe ? '<img$1src="https://placehold.co/110x110/EEE/31343C?text=Placeholder"$3/>' : '') // remove image src from iframe to not throw errors;
 };
 
 const writeHTML = (doc: Document, links: Link[], collapses: Collapse[], title: string) => {
 	doc.open();
-	doc.write('<link rel="stylesheet" href="https://www.spacenk.com/on/demandware.static/Sites-spacenkgb-Site/-/en_GB/v1707286073069/css/global.css" />');
+	//TODO: find a better way to add the css for previews maybe fetch?!?
+	doc.write('<link rel="stylesheet" href="https://www.spacenk.com/on/demandware.static/Sites-spacenkgb-Site/-/en_GB/v1707383070106/css/global.css">');
 	doc.write(generateHTML(links, collapses, title, true));
 	doc.close();
 };
@@ -179,17 +136,17 @@ const CategoryFooterBuilder = () => {
 				</div>
 				<h3 className='text-3xl text-center mt-3'>Preview</h3>
 				<p className='text-[12px] text-center'>
+					Link's Images are placeholders only, will be replaced with the correct image path in the code below. <br/>
 					Keep in mind this is just to give a rough idea of what it would look like. <br/> 
 					It is NOT 100% accurate. Some elements like icons, fonts & images will be missing</p>
 				<iframe 
-					className="w-full h-full mt-5 min-h-[400px]  border-2 border-dashed border-gray-300 bg-white"
+					className="w-full resize-x h-full mt-5 min-h-[400px]  border-2 border-dashed border-gray-300 bg-white"
 					ref={iframeRef}
 				></iframe>
 				<h3 className='text-3xl text-center mt-3'>HTML</h3>
 				<div className="d-flex">
 					<textarea
 						onClick={(e) => {
-							//copy text to clipboard
 							e.currentTarget.select();
 							toast.success('Copied to clipboard', { position: 'top-right' });
 							navigator.clipboard.writeText(e.currentTarget.value);
