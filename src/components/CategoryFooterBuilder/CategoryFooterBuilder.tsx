@@ -136,7 +136,7 @@ const CategoryFooterBuilder = () => {
 						</code>
 						for a page or content link add 
 						<code>
-							{`$httpsUrl('Page-Show', 'pid', '<PAGE_OR_CONTENT_ID_HERE>')$`}
+							{`$httpsUrl('Page-Show', 'cid', '<PAGE_OR_CONTENT_ID_HERE>')$`}
 						</code>
 						
 						<p className='mt-2'>Examples
