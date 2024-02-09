@@ -25,6 +25,9 @@
   label {
     @apply text-sm;
   }
+  code {
+    @apply bg-slate-700 py-0.5 px-1 mx-1 rounded-sm font-sans text-white;
+  }
 }
 @layer utilities {
   .text-balance {

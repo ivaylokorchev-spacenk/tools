@@ -123,6 +123,35 @@ const CategoryFooterBuilder = () => {
 						onChange={(e) => setTitle(e.target.value)}
 					/>
 					<h3 className=''>Collapse elements</h3>
+					<div className='text-xs mb-3 leading-5'>To add link in the copy just add a 
+						<code>{`<a>`}
+						</code> tag.
+						In the href attribute of the a tag for a category link add 
+						<code>
+							{`$httpsUrl('Search-Show', 'cgid', '<CATEGORY_ID_HERE>')$`}
+						</code>
+						for a product link add 
+						<code>
+							{`$httpsUrl('Product-Show', 'pid', '<PRODUCT_ID_HERE>')$`}
+						</code>
+						for a page or content link add 
+						<code>
+							{`$httpsUrl('Page-Show', 'pid', '<PAGE_OR_CONTENT_ID_HERE>')$`}
+						</code>
+						
+						<p className='mt-2'>Examples
+						<code>
+							{`<a href="$httpsUrl('Search-Show', 'cgid', 'makeup')$">Category Link</a>`}
+						</code> 
+						<code>
+							{`<a href="$httpsUrl('Product-Show', 'pid', 'MUK200041575')$">Product Link</a>`}
+						</code> 
+						<code>
+							{`<a href="$httpsUrl('Page-Show', 'cid', 'beauty-events')$">Page Link</a>`}
+						</code> 
+						<br />
+						</p>
+					</div>
 					<div className='flex flex-wrap gap-5'>
 					{collapses.map((collapse, index) => (
 						<CollapseInputs
