@@ -56,7 +56,7 @@ const generateHTML = (links: Link[], collapses: Collapse[], title: string, forIf
 				${title && `<h3 class="mb-2 mb-md-3">${title}</h3>`}
 				${collapses.map(createCollapse).join('')}
 			</div>
-		</div>`.replace(forIframe ? /<img(.*?)src="(.*?)"(.*?)\/>/g : '', forIframe ? '<img$1src="https://placehold.co/110x110/EEE/31343C?text=Placeholder"$3/>' : '') // remove image src from iframe to not throw errors;
+		</div>`.replace(forIframe ? /<img(.*?)src="(.*?)"(.*?)\/>/g : '', forIframe ? '<img$1src="https://placehold.co/110x110/EEE/31343C?text=Placeholder"$3/>' : ''); // remove image src from iframe to not throw errors;
 };
 
 const writeHTML = (doc: Document, links: Link[], collapses: Collapse[], title: string) => {
@@ -90,7 +90,6 @@ const CategoryFooterBuilder = () => {
 		setCollapses((old) => [...old, { title: 'New Collapse Title', copy: 'New Collapse Copy' }]);
 	};
 
-
 	useEffect(() => {
 		const doc = iframeRef.current?.contentDocument;
 		if (doc) {
@@ -99,10 +98,10 @@ const CategoryFooterBuilder = () => {
 	}, [links, collapses]);
 
 	return (
-		<div className='w-full'>
-			<h2 className='mb-5'>Links</h2>
-			<div className="flex flex-col w-full">
-				<div className="grid grid-cols-3 gap-x-3">
+		<div className="tw-w-full">
+			<h2 className="tw-mb-5">Links</h2>
+			<div className="tw-flex tw-flex-col tw-w-full">
+				<div className="tw-grid tw-grid-cols-3 tw-gap-x-3">
 					{links.map((link) => (
 						<LinkInputs
 							key={link.id}
@@ -112,79 +111,71 @@ const CategoryFooterBuilder = () => {
 						/>
 					))}
 				</div>
-				<hr className='my-6'/>
+				<hr className="tw-my-6" />
 				<div>
-					<h2 className="mb-2">Accordion</h2>
+					<h2 className="tw-mb-2">Accordion</h2>
 					<h3>Title</h3>
 					<input
-						className='mb-3'
+						className="tw-mb-3"
 						type="text"
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
 					/>
-					<h3 className=''>Collapse elements</h3>
-					<div className='text-xs mb-3 leading-5'>To add link in the copy just add a 
-						<code>{`<a>`}
-						</code> tag.
-						In the href attribute of the a tag for a category link add 
-						<code>
-							{`$httpsUrl('Search-Show', 'cgid', '<CATEGORY_ID_HERE>')$`}
-						</code>
-						for a product link add 
-						<code>
-							{`$httpsUrl('Product-Show', 'pid', '<PRODUCT_ID_HERE>')$`}
-						</code>
-						for a page or content link add 
-						<code>
-							{`$httpsUrl('Page-Show', 'cid', '<PAGE_OR_CONTENT_ID_HERE>')$`}
-						</code>
-						
-						<p className='mt-2'>Examples
-						<code>
-							{`<a href="$httpsUrl('Search-Show', 'cgid', 'makeup')$">Category Link</a>`}
-						</code> 
-						<code>
-							{`<a href="$httpsUrl('Product-Show', 'pid', 'MUK200041575')$">Product Link</a>`}
-						</code> 
-						<code>
-							{`<a href="$httpsUrl('Page-Show', 'cid', 'beauty-events')$">Page Link</a>`}
-						</code> 
-						<br />
+					<h3 className="">Collapse elements</h3>
+					<div className="tw-text-xs tw-mb-3 tw-leading-5">
+						To add link in the copy just add a<code>{`<a>`}</code> tag. In the href attribute of the a tag for a category link add
+						<code>{`$httpsUrl('Search-Show', 'cgid', '<CATEGORY_ID_HERE>')$`}</code>
+						for a product link add
+						<code>{`$httpsUrl('Product-Show', 'pid', '<PRODUCT_ID_HERE>')$`}</code>
+						for a page or content link add
+						<code>{`$httpsUrl('Page-Show', 'cid', '<PAGE_OR_CONTENT_ID_HERE>')$`}</code>
+						<p className="tw-mt-2">
+							Examples
+							<code>{`<a href="$httpsUrl('Search-Show', 'cgid', 'makeup')$">Category Link</a>`}</code>
+							<code>{`<a href="$httpsUrl('Product-Show', 'pid', 'MUK200041575')$">Product Link</a>`}</code>
+							<code>{`<a href="$httpsUrl('Page-Show', 'cid', 'beauty-events')$">Page Link</a>`}</code>
+							<br />
 						</p>
 					</div>
-					<div className='flex flex-wrap gap-5'>
-					{collapses.map((collapse, index) => (
-						<CollapseInputs
-							key={index}
-							index={index}
-							collapse={collapse}
-							collapses={collapses}
-							setCollapses={setCollapses}
-						/>
-					))}
+					<div className="tw-flex tw-flex-wrap tw-gap-5">
+						{collapses.map((collapse, index) => (
+							<CollapseInputs
+								key={index}
+								index={index}
+								collapse={collapse}
+								collapses={collapses}
+								setCollapses={setCollapses}
+							/>
+						))}
 					</div>
-					<button className='p-3 bg-green-300 rounded-md' onClick={addCollapse}>Add a collapse element</button>
+					<button
+						className="tw-p-3 tw-bg-green-300 tw-rounded-md"
+						onClick={addCollapse}
+					>
+						Add a collapse element
+					</button>
 				</div>
-				<hr className='my-6'/>
-				<h3 className='text-3xl'>Preview</h3>
-				<p className='text-[12px]'>
-					Link&apos;s Images are placeholders only, will be replaced with the correct image path in the code below. <br/>
-					Keep in mind this is just to give a rough idea of what it would look like. <br/> 
-					It is NOT 100% accurate. Some elements like icons, fonts & images will be missing</p>
-				<iframe 
-					className="w-full resize-x h-full mt-5 min-h-[400px]  border-2 border-dashed border-gray-300 bg-white"
+				<hr className="tw-my-6" />
+				<h3 className="tw-text-3xl">Preview</h3>
+				<p className="tw-text-[12px]">
+					Link&apos;s Images are placeholders only, will be replaced with the correct image path in the code below. <br />
+					Keep in mind this is just to give a rough idea of what it would look like. <br />
+					It is NOT 100% accurate. Some elements like icons, fonts & images will be missing
+				</p>
+				<iframe
+					className="tw-w-full tw-resize-x tw-h-full tw-mt-5 tw-min-h-[400px]  tw-border-2 tw-border-dashed tw-border-gray-300 tw-bg-white"
 					ref={iframeRef}
 				></iframe>
-				<hr className='my-10'/>
-				<h3 className='text-3xl mb-3'>HTML</h3>
-				<div className="d-flex">
+				<hr className="tw-my-10" />
+				<h3 className="tw-text-3xl tw-mb-3">HTML</h3>
+				<div className="tw-flex">
 					<textarea
 						onClick={(e) => {
 							e.currentTarget.select();
 							toast.success('Copied to clipboard');
 							navigator.clipboard.writeText(e.currentTarget.value);
 						}}
-						className="w-full flex-1 text-xs min-w-[50%] max-h-[400px] border p-3 cursor-pointer"
+						className="tw-w-full tw-flex-1 tw-text-xs tw-min-w-[50%] tw-max-h-[400px] tw-border tw-p-3 tw-cursor-pointer"
 						cols={100}
 						rows={50}
 						readOnly

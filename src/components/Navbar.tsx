@@ -1,14 +1,34 @@
-import Link from "next/link"
+import Link from 'next/link';
 
-type Props = {}
+const links = [
+	{
+		href: '/',
+		text: 'Home',
+	},
+	{
+		href: '/category-footer',
+		text: 'Category Footer Builder',
+	},
+	{
+		href: '/gwp-carousel',
+		text: 'GWP Carousel Builder',
+	},
+];
 
 const Navbar = () => {
-  return (
-    <nav className="flex mx-auto gap-x-5 px-24 py-3 border-b">
-        <Link className="bg-slate-800 text-white hover:text-gray-300 p-2 text-md rounded-sm" href="/">Home</Link>
-        <Link className="bg-slate-800 text-white hover:text-gray-300 p-2 text-md rounded-sm" href="/category-footer">Category Footer builder</Link>
-    </nav>
-  )
-}
+	return (
+		<nav className="tw-flex tw-bg-slate-800 tw-text-white tw-mx-auto tw-gap-x-5 tw-px-24 tw-py-3 tw-border-b">
+			{links.map((link) => (
+				<Link
+					className="tw-text-white hover:tw-text-gray-300"
+					key={link.href}
+					href={link.href}
+				>
+					{link.text}
+				</Link>
+			))}
+		</nav>
+	);
+};
 
-export default Navbar
+export default Navbar;
