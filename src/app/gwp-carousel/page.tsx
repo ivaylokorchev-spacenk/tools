@@ -1,11 +1,9 @@
-import GWPCarousel from '@/components/GWPCarouselBuilder';
+'use client';
+import { SlidesStoreProvider } from '@/providers/slides-store-provider';
+import GWPCarouselPage from '@/components/pages/gwp-page';
 import Script from 'next/script';
-export const metadata = {
-	title: 'Tools - GWP Carousel Builder',
-	description: 'GWP Carousel Builder',
-};
 
-export default function GWPCarouselPage() {
+export default function Page() {
 	return (
 		<>
 			<style scoped={true}>
@@ -18,7 +16,9 @@ export default function GWPCarouselPage() {
                 }
             `}
 			</style>
-			<GWPCarousel />
+			<SlidesStoreProvider>
+				<GWPCarouselPage />
+			</SlidesStoreProvider>
 			<Script
 				src="https://www.spacenk.com/on/demandware.static/Sites-spacenkgb-Site/-/en_GB/v1723104263170/js/main.js"
 				strategy="lazyOnload"
