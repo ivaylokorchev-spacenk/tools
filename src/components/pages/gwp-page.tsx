@@ -10,11 +10,15 @@ export default function GWPCarouselPage() {
 	const addSlide = useSlidesStore((state) => state.addSlide);
 	usePolyfill();
 	return (
-		<div className="tw-flex tw-flex-col tw-gap-y-12 tw-container tw-mx-auto tw-p-20 tw-md:tw-p-32">
-			<div className="tw-flex tw-flex-col tw-gap-y-12 tw-container tw-overflow-hidden">
-				<h1>Build a gwp carousel </h1>
-				<h2>Preview & edit</h2>
-				<Swiper />
+		<div className="tw-flex tw-flex-col tw-gap-y-4 tw-container tw-max-w-5xl tw-mx-auto tw-p-12">
+			<div className="tw-flex tw-flex-col tw-gap-y-4 tw-container tw-overflow-hidden">
+				<div>
+					<h4>Preview & edit</h4>
+					<p className="tw-text-xs">Click on each copy and edit directly. Hover over the image to view and edit the image url.</p>
+				</div>
+				<div className="tw-p-8 tw-bg-white">
+					<Swiper />
+				</div>
 			</div>
 			<button
 				onClick={addSlide}
@@ -22,8 +26,11 @@ export default function GWPCarouselPage() {
 			>
 				ADD SLIDE
 			</button>
-			<h2>Code</h2>
-			<TextArea />
+			<hr />
+			<div className="tw-w-full">
+				<h4>Code</h4>
+				<TextArea />
+			</div>
 		</div>
 	);
 }
@@ -33,8 +40,9 @@ const TextArea = () => {
 
 	return (
 		<textarea
-			className="tw-text-xs"
-			onClick={(e) => {
+			className="tw-text-xs tw-w-full"
+			onFocus={(e) => {
+				e.currentTarget.focus();
 				e.currentTarget.select();
 				navigator.clipboard.writeText(e.currentTarget.value);
 				toast.success('Copied to clipboard');
@@ -49,7 +57,7 @@ const TextArea = () => {
 					</SlidesStoreProvider>
 				)
 			)
-				.replaceAll('contentEditable="true"', '') // Remove contentEditable attribute
+				.replaceAll('contentEditable="true"', '')
 				.replace(/<link\s+rel="preload"[^>]*>/gi, '')}
 		></textarea>
 	);

@@ -6,7 +6,7 @@ import { useSlidesStore } from '@/providers/slides-store-provider';
 
 function SwiperStatic({ slides }: { slides: Slide[] }) {
 	return (
-		<div className="gwp-pdp-slider custom-swiper-buttons custom-swiper-buttons--overlap position-relative">
+		<div className="gwp-pdp-slider gwp-pdp-slider--reverse custom-swiper-buttons custom-swiper-buttons--overlap position-relative">
 			<div
 				className="swiper swiper-slider"
 				data-carousel-type="GWP_PDP"
@@ -31,7 +31,7 @@ function SwiperStatic({ slides }: { slides: Slide[] }) {
 //TODO: Add state management so that the slides can be edited without having to be passed down as props
 export default function Swiper() {
 	const swiperRef = useRef<HTMLDivElement>(null);
-	const slides = useSlidesStore((state) => state.slides);
+	const { slides } = useSlidesStore((state) => state);
 
 	useEffect(() => {
 		if (window && window.$) {
@@ -44,6 +44,8 @@ export default function Swiper() {
 			}
 		}
 	}, [slides]);
+
+	if (slides.length === 0) return <SwiperSkeleton />;
 
 	return (
 		<div className="gwp-pdp-slider custom-swiper-buttons custom-swiper-buttons--overlap position-relative tw-bg-white">
@@ -67,6 +69,25 @@ export default function Swiper() {
 		</div>
 	);
 }
+
+const SwiperSkeleton = () => {
+	return (
+		<div className="tw-py-8 tw-px-3 tw-bg-white">
+			<div className="tw-relative tw-border-gray-200 tw-border-2 tw-animate-pulse tw-h-52 tw-flex tw-justify-between">
+				<div className="tw-h-8 tw-bg-gray-200 tw-w-32 tw-mb-4 tw-absolute -tw-top-0 -tw-translate-y-1/2 tw-left-2"></div>
+				<div className="tw-p-6 tw-w-full">
+					<div className="tw-h-4 tw-bg-gray-200 tw-rounded-md tw-w-4/12"></div>
+					<div className="tw-h-5 tw-bg-gray-200 tw-rounded-md tw-w-11/12 tw-mt-2"></div>
+					<div className="tw-h-5 tw-bg-gray-200 tw-rounded-md tw-w-10/12 tw-mt-1"></div>
+					<div className="tw-h-5 tw-bg-gray-200 tw-rounded-md tw-w-5/12 tw-mt-1"></div>
+					<div className="tw-h-3 tw-bg-gray-200 tw-rounded-md tw-w-48 tw-mt-4"></div>
+					<div className="tw-h-3 tw-bg-gray-200 tw-rounded-md tw-w-48 tw-mt-2"></div>
+				</div>
+				<div className="tw-h-full tw-aspect-square tw-bg-gray-200"></div>
+			</div>
+		</div>
+	);
+};
 
 const SwiperSlide = ({ badge, copy, subCopy, title, imageUrl, index, levelText, isStatic }: Slide) => {
 	const { deleteSlide, updateSlide } = useSlidesStore((state) => state);

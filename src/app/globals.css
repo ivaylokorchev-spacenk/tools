@@ -29,6 +29,10 @@
 	code {
 		@apply tw-bg-slate-700 tw-py-0.5 tw-px-1 tw-mx-1 tw-rounded-sm tw-font-sans tw-text-white;
 	}
+
+	[contentEditable='true'] {
+		@apply tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 empty:tw-min-w-12 empty:tw-ring-2 empty:tw-ring-yellow-300;
+	}
 }
 
 #panel-top {

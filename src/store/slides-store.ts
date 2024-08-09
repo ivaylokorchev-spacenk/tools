@@ -2,7 +2,7 @@ import toast from 'react-hot-toast';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { createStore } from 'zustand/vanilla';
 
-const defaultSlideContent = {
+export const defaultSlideContent = {
 	index: 0,
 	levelText: 'Level 1',
 	badge: 'Free Gift',
@@ -30,7 +30,7 @@ type Action = {
 export type Slides = State & Action;
 
 export const defaultInitState: State = {
-	slides: [defaultSlideContent],
+	slides: [],
 };
 
 export const createSlidesStore = (initState: State = defaultInitState) => {
@@ -38,15 +38,24 @@ export const createSlidesStore = (initState: State = defaultInitState) => {
 		persist(
 			(set) => ({
 				...initState,
-				addSlide: () => set((state) => ({ slides: [...state.slides, { ...state.slides[state.slides.length - 1], index: state.slides.length + 1 }] })),
+				addSlide: () =>
+					set((state) => {
+						if (state.slides.length === 0) {
+							return { slides: [defaultSlideContent] };
+						}
+						const lastSlide = state.slides[state.slides.length - 1];
+
+						return { slides: [...state.slides, { ...lastSlide, index: lastSlide.index + 1 }] };
+					}),
 				updateSlide: (newSlide) => set((state) => ({ slides: state.slides.map((slide) => (slide.index === newSlide?.index ? newSlide : slide)) })),
 				deleteSlide: (index) => {
 					set((state) => {
-						if (state.slides.length === 1) {
-							toast.error('Cannot delete the last slide');
-							return state;
+						const newSlides = state.slides.filter((slide) => slide.index !== index);
+						if (newSlides.length === 0) {
+							toast.error('Last slide cannot be deleted');
+							return { slides: state.slides };
 						}
-						return { slides: state.slides.filter((slide) => slide.index !== index) };
+						return { slides: newSlides };
 					});
 				},
 			}),
