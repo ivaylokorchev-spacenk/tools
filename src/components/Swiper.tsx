@@ -48,7 +48,7 @@ export default function Swiper() {
 	if (slides.length === 0) return <SwiperSkeleton />;
 
 	return (
-		<div className="gwp-pdp-slider custom-swiper-buttons custom-swiper-buttons--overlap position-relative tw-bg-white">
+		<div className="gwp-pdp-slider gwp-pdp-slider--reverse custom-swiper-buttons custom-swiper-buttons--overlap position-relative tw-bg-white">
 			<div
 				ref={swiperRef}
 				className="swiper swiper-slider"
@@ -139,7 +139,7 @@ const SwiperSlide = ({ badge, copy, subCopy, title, imageUrl, index, levelText, 
 				<div className="gwp-pdp-slider__copy p-0">
 					<div className="mt-2 mt-md-3 px-3 py-2 py-md-3">
 						<h5
-							className="mb-1"
+							className="my-1"
 							contentEditable
 							suppressContentEditableWarning={true}
 							onBlur={(e) => setLevelText(e.currentTarget.textContent || '')}
@@ -165,7 +165,7 @@ const SwiperSlide = ({ badge, copy, subCopy, title, imageUrl, index, levelText, 
 							contentEditable
 							suppressContentEditableWarning={true}
 							onBlur={(e) => setSubCopyText(e.currentTarget.textContent || '')}
-							className="d-none d-md-block mb-2"
+							className="d-none d-md-block mb-0"
 						>
 							{subCopyText}
 						</p>
@@ -173,7 +173,6 @@ const SwiperSlide = ({ badge, copy, subCopy, title, imageUrl, index, levelText, 
 				</div>
 				<div
 					className={`gwp-pdp-slider__img ${!isStatic ? 'tw-relative' : ''}`}
-					style={{ height: '177px', width: '177px' }}
 					onMouseEnter={() => setShowInput(true)}
 					onMouseLeave={() => setShowInput(false)}
 				>
@@ -184,7 +183,7 @@ const SwiperSlide = ({ badge, copy, subCopy, title, imageUrl, index, levelText, 
 					/>
 					{showInput && (
 						<textarea
-							style={{ width: 150, height: 150 }}
+							style={{ width: 140, height: 140 }}
 							className="tw-text-xs tw-absolute tw-top-1/2 tw-left-1/2 -tw-translate-x-1/2 -tw-translate-y-1/2"
 							value={imageSrc}
 							rows={5}
