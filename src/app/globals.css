@@ -43,3 +43,26 @@
 		text-wrap: balance;
 	}
 }
+/* TODO: Remove these when they go live */
+.gwp-pdp-slider--reverse .gwp-pdp-slider__banner {
+	display: grid;
+	grid-template-columns: 1fr 145px;
+}
+
+.gwp-pdp-slider--reverse .gwp-pdp-slider__img {
+	width: unset;
+	height: unset;
+}
+.gwp-pdp-slider--reverse .gwp-pdp-slider__img img {
+	height: 100%;
+	object-fit: cover;
+}
+
+@media (min-width: 810px) {
+	.gwp-pdp-slider--reverse .gwp-pdp-slider__badge {
+		margin-left: 0.5rem;
+	}
+	.gwp-pdp-slider--reverse .gwp-pdp-slider__banner {
+		grid-template-columns: 1fr 175px;
+	}
+}

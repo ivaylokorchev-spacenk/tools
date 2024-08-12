@@ -6,7 +6,7 @@ export const defaultSlideContent = {
 	index: 0,
 	levelText: 'Level 1',
 	badge: 'Free Gift',
-	imageUrl: 'https://www.spacenk.com/dw/image/v2/ABCE_PRD/on/demandware.static/-/Sites-spacenkmastercatalog/default/dw24f078e7/products/C_RET_SUPP/UK200049892_C_RET_SUPP.jpg?sw=292&amp;sh=292',
+	imageUrl: 'https://www.spacenk.com/on/demandware.static/-/Library-Sites-spacenk-global/default/dw00d6963a/pd_homepages/24_WK18/emma-lewisham-inside.jpg',
 	title: 'COMPLIMENTARY Molecular Silk Amino Hydrating Cleanser (25ml)',
 	copy: `When you spend <span class="ge-only" data-original-price="60">£60</span> on Allies of Skin`,
 	subCopy: 'Adds to bag automatically.',
