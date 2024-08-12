@@ -192,7 +192,7 @@ const SwiperSlide = ({ badge, copy, subCopy, title, imageUrl, index, levelText, 
 					)}
 				</div>
 				<i
-					className="gwp-pdp-slider__tooltip icon-snk-info tooltip-info d-md-none"
+					className="gwp-pdp-slider__tooltip icon-snk-info tooltip-info lh-0 d-md-none"
 					role="tooltip"
 					aria-label={subCopyText}
 					title=""

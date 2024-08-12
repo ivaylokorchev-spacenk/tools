@@ -5,9 +5,21 @@ import Swiper from '@/components/Swiper';
 import { usePolyfill } from '@/utils/usePolyfill';
 import { SlidesStoreProvider, useSlidesStore } from '@/providers/slides-store-provider';
 import { decodeHtml } from '@/utils';
+import { useMemo, useRef } from 'react';
 
 export default function GWPCarouselPage() {
-	const addSlide = useSlidesStore((state) => state.addSlide);
+	const { addSlide, slides } = useSlidesStore((state) => state);
+	const html = useMemo(() => {
+		return decodeHtml(
+			ReactDOMServer.renderToString(
+				<SlidesStoreProvider>
+					<Swiper.Static slides={slides} />
+				</SlidesStoreProvider>
+			)
+		)
+			.replaceAll('contentEditable="true"', '')
+			.replace(/<link\s+rel="preload"[^>]*>/gi, '');
+	}, [slides]);
 	usePolyfill();
 	return (
 		<div className="tw-flex tw-flex-col tw-gap-y-4 tw-container tw-max-w-5xl tw-mx-auto tw-p-12">
@@ -29,13 +41,20 @@ export default function GWPCarouselPage() {
 			<hr />
 			<div className="tw-w-full">
 				<h4>Code</h4>
-				<TextArea />
+				<TextArea html={html} />
+			</div>
+			<div>
+				<h4>Preview</h4>
+				<div
+					className="tw-bg-white"
+					dangerouslySetInnerHTML={{ __html: html }}
+				></div>
 			</div>
 		</div>
 	);
 }
 
-const TextArea = () => {
+const TextArea = ({ html }: { html: string }) => {
 	const slides = useSlidesStore((state) => state.slides);
 
 	return (
@@ -50,15 +69,7 @@ const TextArea = () => {
 			cols={20}
 			rows={20}
 			onChange={() => {}}
-			value={decodeHtml(
-				ReactDOMServer.renderToString(
-					<SlidesStoreProvider>
-						<Swiper.Static slides={slides} />
-					</SlidesStoreProvider>
-				)
-			)
-				.replaceAll('contentEditable="true"', '')
-				.replace(/<link\s+rel="preload"[^>]*>/gi, '')}
+			value={html}
 		></textarea>
 	);
 };
