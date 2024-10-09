@@ -1,4 +1,4 @@
-export const styles = `<style>
+export const styles = `<style translate="no">
 .search-slot-bottom {
   padding: 24px 0;
 }
