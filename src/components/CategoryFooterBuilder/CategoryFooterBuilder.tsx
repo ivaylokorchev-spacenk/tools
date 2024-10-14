@@ -21,7 +21,7 @@ const createLink = (link: Link) => {
 	if (!link.text || !link.imagePath || !link.articleId) return '';
 	return `
 	<a class="d-flex align-items-center gap-x-4 text-decoration-none flex-grow-1" title="${link.text}" href="$httpsUrl('Page-Show', 'cid', '${link.articleId}')$">
-		<img width="74" height="74" src="${link.imagePath}?$staticlink$" alt="${link.text}" />
+		<div><img width="74" height="74" src="${link.imagePath}?$staticlink$" alt="${link.text}" /></div>
 		<div class="d-flex align-items-center flex-grow-1">
 			<span class="h2 font-amari line-clamp-3 flex-grow-1 mb-0">${link.text}</span>
 			<i class="icon-snk-arrow-right"></i>
