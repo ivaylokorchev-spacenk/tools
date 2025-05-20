@@ -7,6 +7,12 @@ import { SlidesStoreProvider, useSlidesStore } from '@/providers/slides-store-pr
 import { decodeHtml } from '@/utils';
 import { useMemo, useRef } from 'react';
 
+function stripAndEscapeHtml(htmlString: string) {
+	const temp = document.createElement('div');
+	temp.innerHTML = htmlString;
+	return temp.textContent || temp.innerText || '';
+}
+
 export default function GWPCarouselPage() {
 	const { addSlide, slides } = useSlidesStore((state) => state);
 	const html = useMemo(() => {
@@ -19,6 +25,21 @@ export default function GWPCarouselPage() {
 		)
 			.replaceAll('contentEditable="true"', '')
 			.replace(/<link\s+rel="preload"[^>]*>/gi, '');
+	}, [slides]);
+
+	const json = useMemo(() => {
+		return slides.map((slide) => {
+			const { imageUrl, title, copy, subCopy, levelText, badge } = slide;
+			return {
+				badgeText: stripAndEscapeHtml(badge),
+				subtitle: stripAndEscapeHtml(levelText),
+				title: stripAndEscapeHtml(title),
+				originalCopy: copy,
+				copy: stripAndEscapeHtml(copy),
+				subcopy: stripAndEscapeHtml(subCopy),
+				imageUrl: stripAndEscapeHtml(imageUrl),
+			};
+		});
 	}, [slides]);
 	usePolyfill();
 	return (
@@ -41,7 +62,7 @@ export default function GWPCarouselPage() {
 			<hr />
 			<div className="tw-w-full">
 				<h4>Code</h4>
-				<TextArea html={html} />
+				<TextArea html={JSON.stringify(json)} />
 			</div>
 			<div>
 				<h4>Preview</h4>
