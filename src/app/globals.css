@@ -33,6 +33,9 @@
 	[contentEditable='true'] {
 		@apply tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 empty:tw-min-w-12 empty:tw-ring-2 empty:tw-ring-yellow-300;
 	}
+	h5[contentEditable='true'] {
+		@apply empty:!tw-block;
+	}
 }
 
 #panel-top {
