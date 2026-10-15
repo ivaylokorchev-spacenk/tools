@@ -1,8 +1,6 @@
 'use client';
-import { SlidesStoreProvider } from '@/providers/slides-store-provider';
 import GWPCarouselPageHTML from '@/components/pages/gwp-page';
 import GWPCarouselPageJSON from '@/components/pages/gwp-page-json';
-import Script from 'next/script';
 import { useState } from 'react';
 
 export default function Page() {
@@ -10,16 +8,6 @@ export default function Page() {
 
 	return (
 		<>
-			<style scoped={true}>
-				{`
-                @import url(https://www.spacenk.com/on/demandware.static/Sites-spacenkgb-Site/-/en_GB/v1723104263170/css/font.css);
-                @import url(https://www.spacenk.com/on/demandware.static/Sites-spacenkgb-Site/-/en_GB/v1723104263170/css/global.css);
-                @import url(https://www.spacenk.com/on/demandware.static/Sites-spacenkgb-Site/-/en_GB/v1723104263170/css/icons.css);
-                i {
-                    visibility: visible !important;
-                }
-            `}
-			</style>
 			<div className="tw-flex tw-justify-end tw-items-center tw-p-4">
 				<label className="tw-ml-auto tw-relative tw-flex tw-items-center tw-p-2 tw-text-sm tw-gap-4">
 					<span className={`tw-text-gray-700 ${type === 'html' ? 'tw-font-bold' : ''}`}>HTML</span>
@@ -39,11 +27,7 @@ export default function Page() {
 					<span className={`tw-text-gray-700 ${type === 'json' ? 'tw-font-bold' : ''}`}>JSON</span>
 				</label>
 			</div>
-			<SlidesStoreProvider>{type === 'html' ? <GWPCarouselPageHTML /> : <GWPCarouselPageJSON />}</SlidesStoreProvider>
-			<Script
-				src="https://www.spacenk.com/on/demandware.static/Sites-spacenkgb-Site/-/en_GB/v1723104263170/js/main.js"
-				strategy="lazyOnload"
-			/>
+			{type === 'html' ? <GWPCarouselPageHTML /> : <GWPCarouselPageJSON />}
 		</>
 	);
 }

@@ -3,7 +3,7 @@
 import { type ReactNode, createContext, useRef, useContext, useEffect } from 'react';
 import { useStore } from 'zustand';
 
-import { type Slides, createSlidesStore, defaultSlideContent } from '@/store/slides-store';
+import { type Slides, createSlidesStore } from '@/store/slides-store';
 
 export type SlidesStoreApi = ReturnType<typeof createSlidesStore>;
 
@@ -18,6 +18,21 @@ export const SlidesStoreProvider = ({ children }: SlidesStoreProviderProps) => {
 	if (!storeRef.current) {
 		storeRef.current = createSlidesStore();
 	}
+
+	useEffect(() => {
+		const store = storeRef.current;
+		if (!store) return;
+
+		const ensureDefaultSlide = () => {
+			if (store.getState().slides.length === 0) {
+				store.getState().addSlide();
+			}
+		};
+
+		ensureDefaultSlide();
+		return store.persist.onFinishHydration(ensureDefaultSlide);
+	}, []);
+
 	return <SlidesStoreContext.Provider value={storeRef.current}>{children}</SlidesStoreContext.Provider>;
 };
 
@@ -27,10 +42,6 @@ export const useSlidesStore = <T,>(selector: (store: Slides) => T): T => {
 	if (!slidesStoreContext) {
 		throw new Error(`useSlidesStore must be used within SlidesStoreProvider`);
 	}
-	useEffect(() => {
-		if (slidesStoreContext.getState().slides.length === 0) {
-			slidesStoreContext.getState().addSlide();
-		}
-	}, []);
+
 	return useStore(slidesStoreContext, selector);
 };

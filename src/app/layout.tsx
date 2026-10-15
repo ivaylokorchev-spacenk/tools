@@ -1,11 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Jost } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import { Toaster } from 'react-hot-toast';
 import { SlidesStoreProvider } from '@/providers/slides-store-provider';
 
-const inter = Inter({ subsets: ['latin'] });
+const jost = Jost({ subsets: ['latin'], variable: '--font-jost' });
 
 export const metadata: Metadata = {
 	title: 'Tools - Home',
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={`${jost.variable} ${jost.className}`}>
 				<Toaster />
 				<Navbar />
 				<SlidesStoreProvider>{children}</SlidesStoreProvider>
